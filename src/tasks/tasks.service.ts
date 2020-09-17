@@ -11,12 +11,23 @@ export class TasksService {
       title: 'First Item',
       description: 'No description',
       status: TaskStatus.DONE
+    },
+    {
+      id: '2',
+      title: 'First Item 2 ',
+      description: 'No description 2',
+      status: TaskStatus.DONE
     }
   ];
 
   getAllTasks(): Task[] {
     return this.tasks;
   };
+
+  getTaskById(id: string): Task {
+    const item = this.tasks.find(item => item.id === id);
+    return item;
+  }
 
   createTask(createTaskDto: CreateTaskDto): Task {
     const { title, description } = createTaskDto;
