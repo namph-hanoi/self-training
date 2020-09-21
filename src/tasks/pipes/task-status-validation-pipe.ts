@@ -1,7 +1,33 @@
-import { ArgumentMetadata, PipeTransform } from "@nestjs/common";
+import { ArgumentMetadata, BadRequestException, PipeTransform } from "@nestjs/common";
+import { TaskStatus } from "../task.model";
 
 export class TaskStatusValidationPipe implements PipeTransform {
-  transform(value: any, metadata: ArgumentMetadata) {
-    console.log("TaskStatusValidationPipe -> transform -> (value: any, metadata", value, metadata)
+  readonly allowedStatusese = [
+    TaskStatus.OPEN,
+    TaskStatus.IN_PROGRESS,
+    TaskStatus.DONE
+  ];
+
+  private isStatusValid(input) {
+    const indx = this.allowedStatusese.indexOf(input);
+    return indx !== -1;
   };
+
+  // This Class only run the function which named "transform" the abc doesn't execute
+  // abc(value: any, metadata: ArgumentMetadata) {
+  //   value = value.toUpperCase();
+  //   if (!this.isStatusValid(value)) {
+  //     throw new BadRequestException(`"${value}" is a valid status`)
+  //   }
+  //   return value;
+  // };
+
+  transform(value: any, metadata: ArgumentMetadata) {
+      value = value.toUpperCase();
+      if (!this.isStatusValid(value)) {
+        throw new BadRequestException(`"${value}" is not a valid status`)
+      }
+      return value;
+  };
+
 }
