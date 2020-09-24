@@ -29,4 +29,10 @@ export class TasksService {
     const found = await this.getTaskById(id);
     return this.taskRepository.delete(id)
   };
+
+  async updateTaskById(id: number, status: TaskStatus) {
+    const found = await this.getTaskById(id);
+    found.status = status;
+    return found.save();
+  }
 }
