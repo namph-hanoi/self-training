@@ -24,4 +24,9 @@ export class TasksService {
   async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskRepository.createTask(createTaskDto);
   };
+
+  async deleteTaskById(id: number): Promise<any> {
+    const found = await this.getTaskById(id);
+    return this.taskRepository.delete(id)
+  };
 }
