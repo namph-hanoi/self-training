@@ -26,13 +26,18 @@ export class TasksService {
   };
 
   async deleteTaskById(id: number): Promise<any> {
-    const found = await this.getTaskById(id);
+    await this.getTaskById(id);
     return this.taskRepository.delete(id)
   };
 
-  async updateTaskById(id: number, status: TaskStatus) {
+  async updateTaskById(id: number, status: TaskStatus): Promise<any> {
     const found = await this.getTaskById(id);
     found.status = status;
     return found.save();
+  };
+
+  async getTasksFilter(getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
+    debugger;
+    return this.taskRepository.getTasksFilter(getTasksFilterDto);
   }
 }
