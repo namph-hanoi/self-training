@@ -20,8 +20,8 @@ export class TasksController {
   };
 
   @Get()
-  getAllTasks(@Query() getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
-    return this.tasksService.getTasksFilter(getTasksFilterDto);
+  getAllTasks(@Query() getTasksFilterDto: GetTasksFilterDto, @GetUser() user: User): Promise<Task[]> {
+    return this.tasksService.getTasksFilter(getTasksFilterDto, user);
   }
 
   @Post()
