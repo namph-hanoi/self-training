@@ -43,7 +43,6 @@ export class TasksService {
   };
 
   async getTasksFilter(getTasksFilterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
-    debugger;
     return this.taskRepository.getTasksFilter(getTasksFilterDto, user);
   }
 }

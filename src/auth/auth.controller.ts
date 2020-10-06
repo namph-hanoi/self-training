@@ -24,7 +24,7 @@ export class AuthController {
 
   @Post('test')
   @UseGuards(AuthGuard())
-  test(@GetUser() user: User): void {
+  test(@GetUser('kkkyu', 'yyz') user: User): void {
     console.log("AuthController -> test -> req", user)
 
   }
