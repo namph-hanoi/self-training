@@ -1,2 +1,5 @@
+server:
+  origin: ['phanhoainam.com', 'www.phanhoainam.com']
+
 db:
   synchronize: false
