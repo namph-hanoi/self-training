@@ -16,6 +16,13 @@ type CatType {
   breed: String!
 }
 
+type Lesson {
+  id: ID!
+  name: String!
+  startDate: String!
+  endDate: String!
+}
+
 type Mutation {
   createCat(input: CatInput!): CatType!
 }
@@ -23,4 +30,5 @@ type Mutation {
 type Query {
   hello: String!
   cats: [CatType!]!
+  lesson: Lesson!
 }

@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
+import { LessonModule } from './lesson/lesson.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CatsModule } from './cats/cats.module';
       autoSchemaFile: 'schema.gql',
     }),
     MongooseModule.forRoot('mongodb://localhost/nest'),
+    LessonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
