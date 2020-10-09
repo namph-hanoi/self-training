@@ -25,6 +25,7 @@ type Lesson {
 
 type Mutation {
   createCat(input: CatInput!): CatType!
+  createLesson: Lesson!
 }
 
 type Query {
