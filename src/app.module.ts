@@ -10,7 +10,7 @@ import { LessonModule } from './lesson/lesson.module';
 
 @Module({
   imports: [
-    CatsModule,
+    // CatsModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
     }),
@@ -23,7 +23,7 @@ import { LessonModule } from './lesson/lesson.module';
         Lesson
       ]
     }),
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    // MongooseModule.forRoot('mongodb://localhost/nest'),
     LessonModule,
   ],
   controllers: [AppController],

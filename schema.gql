@@ -3,19 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-input CatInput {
-  name: String!
-  age: Int!
-  breed: String!
-}
-
-type CatType {
-  id: ID!
-  name: String!
-  age: Int!
-  breed: String!
-}
-
 type Lesson {
   id: ID!
   name: String!
@@ -24,12 +11,9 @@ type Lesson {
 }
 
 type Mutation {
-  createCat(input: CatInput!): CatType!
-  createLesson: Lesson!
+  createLesson(endDate: String!, startDate: String!, name: String!): Lesson!
 }
 
 type Query {
-  hello: String!
-  cats: [CatType!]!
   lesson: Lesson!
 }
