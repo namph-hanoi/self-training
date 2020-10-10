@@ -15,5 +15,5 @@ type Mutation {
 }
 
 type Query {
-  lesson: Lesson!
+  lesson(id: String!): Lesson!
 }
