@@ -1,1 +1,1 @@
-Empty master branch
+Empty frontend branch
