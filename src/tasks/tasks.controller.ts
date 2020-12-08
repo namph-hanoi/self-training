@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, Query, UsePipes, ValidationPipe, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, Query, UsePipes, ValidationPipe, ParseIntPipe, UseGuards, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation-pipe';
@@ -8,6 +8,7 @@ import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -55,4 +56,10 @@ export class TasksController {
   ): Promise<void> {
     return this.tasksService.updateTaskById(id, status, user);
   }
+
+@Post('upload')
+@UseInterceptors(FileInterceptor('file'))
+uploadFile(@UploadedFile() file) {
+  console.log(file);
+}
 }
