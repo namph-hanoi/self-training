@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    mainAlo: "./src/main.js"
+    mainAlo: ["./src/main.js"]
   },
   mode: "development",
   output: {
@@ -13,5 +13,20 @@ module.exports = {
   devServer: {
     contentBase: "dist",
     publicPath: "/"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ],
+      }
+    ]
   }
 };
