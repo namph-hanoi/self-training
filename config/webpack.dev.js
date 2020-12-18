@@ -12,7 +12,7 @@ module.exports = {
   },
   devServer: {
     contentBase: "dist",
-    publicPath: "/"
+    overlay: true
   },
   module: {
     rules: [
@@ -26,6 +26,23 @@ module.exports = {
             loader: 'css-loader'
           }
         ],
+      },
+      {
+        test: /\.html$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].html"
+            }
+          },
+          {
+            loader: "extract-loader",
+          },
+          {
+            loader: "html-loader",
+          }
+        ]
       }
     ]
   }
