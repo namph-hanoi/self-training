@@ -6,6 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 // Bring routes
 const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
 const mongoose = require('mongoose');
 
 // app
@@ -37,6 +38,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // routes
 app.use('/api', blogRoutes);
+app.use('/api', authRoutes);
 
 // port
 const port = process.env.PORT || 8000;
