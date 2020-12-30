@@ -1,5 +1,10 @@
 exports.signup = (req, res) => {
+  const { name, email, password } = req.body;
   res.json({
-    time: Date().toString()
-  });
+    user: {
+      name,
+      email,
+      password
+    }
+  })
 };
