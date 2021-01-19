@@ -1,10 +1,10 @@
 const path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: {
     mainAlo: ["./src/main.js"]
   },
-  mode: "development",
   output: {
     filename: "[name]-bundle.js",
     path: path.resolve(__dirname, "../dist"),
@@ -16,6 +16,14 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
+      },
       {
         test: /\.css$/i,
         use: [
