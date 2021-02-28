@@ -1,5 +1,5 @@
 Arguments: 
-  /home/yolo/.nvm/versions/node/v15.8.0/bin/node /home/yolo/.nvm/versions/node/v15.8.0/bin/yarn add -D @type/express
+  /home/yolo/.nvm/versions/node/v15.8.0/bin/node /home/yolo/.nvm/versions/node/v15.8.0/bin/yarn add typegraphql
 
 PATH: 
   /home/yolo/.nvm/versions/node/v15.8.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@type%2fexpress: Not found
+  Error: https://registry.yarnpkg.com/typegraphql: Not found
       at Request.params.callback [as _callback] (/home/yolo/.nvm/versions/node/v15.8.0/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/home/yolo/.nvm/versions/node/v15.8.0/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (node:events:378:20)
