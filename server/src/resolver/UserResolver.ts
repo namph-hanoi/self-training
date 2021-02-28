@@ -13,6 +13,13 @@ export class UserResolver {
     return 'Hi Yolo';
   };
 
+  @Query(() => [User])
+  users (@Arg("data") data: string) {
+    if (!!data)
+      return User.find();
+    return [] as Array<User>
+  };
+
   @Mutation(() => Boolean)
   async register(
     @Arg('email') email: string,
