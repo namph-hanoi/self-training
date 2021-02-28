@@ -5,10 +5,13 @@ import {
   Mutation,
   Arg,
   ObjectType,
-  Field
+  Field,
+  Ctx
 } from 'type-graphql';
 import { compare, hash } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
+import { MyContext } from 'src/MyContext';
+import { refreshTokenObjKey } from '../common/constants';
+import { createAccessToken, createRefreshToken } from '../utils/auth';
 @ObjectType()
 export class LoginResponse {
   @Field()
@@ -32,7 +35,8 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   async login(
     @Arg('email') email: string,
-    @Arg('password') password: string 
+    @Arg('password') password: string,
+    @Ctx() { res }: MyContext
   ) {
     const user = await User.findOne({
       where: { email }
@@ -47,12 +51,15 @@ export class UserResolver {
       throw new Error("The password is not matched")
     }
 
+    res.cookie(
+      refreshTokenObjKey,
+      createRefreshToken(user),
+      // httpOnly to get rid of access using JS
+      { httpOnly: true }
+    )
+
     return {
-      accessToken: sign(
-        { userId: user.id },
-        'randomStringAsSecretKey',
-        { expiresIn: '15m' }
-      )
+      accessToken: createAccessToken(user)
     };
   };
 
