@@ -3,9 +3,18 @@ import {
   Resolver,
   Query,
   Mutation,
-  Arg
+  Arg,
+  ObjectType,
+  Field
 } from 'type-graphql';
-import { hash } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+@ObjectType()
+export class LoginResponse {
+  @Field()
+  accessToken: string;
+};
+
 @Resolver()
 export class UserResolver {
   @Query(() => String)
@@ -18,6 +27,33 @@ export class UserResolver {
     if (!!data)
       return User.find();
     return [] as Array<User>
+  };
+
+  @Mutation(() => LoginResponse)
+  async login(
+    @Arg('email') email: string,
+    @Arg('password') password: string 
+  ) {
+    const user = await User.findOne({
+      where: { email }
+    });
+
+    if (!user) {
+      throw new Error("Coun't find the user");
+    }
+
+    const isPassValid = await compare(password, user.password);
+    if (!isPassValid) {
+      throw new Error("The password is not matched")
+    }
+
+    return {
+      accessToken: sign(
+        { userId: user.id },
+        'randomStringAsSecretKey',
+        { expiresIn: '15m' }
+      )
+    };
   };
 
   @Mutation(() => Boolean)
