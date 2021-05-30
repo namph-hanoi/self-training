@@ -6,12 +6,15 @@ import {
   Arg,
   ObjectType,
   Field,
-  Ctx
+  Ctx,
+  UseMiddleware
 } from 'type-graphql';
 import { compare, hash } from 'bcryptjs';
 import { MyContext } from 'src/MyContext';
 import { refreshTokenObjKey } from '../common/constants';
 import { createAccessToken, createRefreshToken } from '../utils/auth';
+import { isAuth } from '../isAuthMiddleware';
+
 @ObjectType()
 export class LoginResponse {
   @Field()
@@ -22,6 +25,13 @@ export class LoginResponse {
 export class UserResolver {
   @Query(() => String)
   hello () {
+    return 'Hi Yolo';
+  };
+
+  @Query(() => String)
+  @UseMiddleware(isAuth)
+  bye(@Ctx() { payload }: MyContext) {
+    console.log(["🚀 ~ file: UserResolver.ts ~ line 33 ~ UserResolver ~ bye ~ payload", payload]);
     return 'Hi Yolo';
   };
 
